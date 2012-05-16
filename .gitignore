@@ -1,0 +1,11 @@
+/generated
+/databases/generated
+/artifacts
+/target
+/reports
+/*.iws
+/*.ipr
+/*.iml
+/_buildr.rb
+/config/database.yml
+/services

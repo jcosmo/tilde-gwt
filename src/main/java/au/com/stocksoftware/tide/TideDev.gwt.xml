@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='calendar'>
+  <inherits name='au.com.stocksoftware.tide.Tide'/>
+  <!-- Compile a single permutation for all platforms -->
+  <collapse-all-properties/>
+
+  <!-- To change the default logLevel -->
+  <set-property name="gwt.logging.logLevel" value="ALL"/>
+  <!-- TRUE or FALSE to enable logging at all -->
+  <set-property name="gwt.logging.enabled" value="TRUE"/>
+  <!-- ENABLED OR DISABLED for different Handlers -->
+
+  <set-property name="gwt.logging.enabled" value="TRUE"/>
+  <set-property name="gwt.logging.logLevel" value="INFO"/>
+  <set-property name="gwt.logging.consoleHandler" value="ENABLED"/>
+  <set-property name="gwt.logging.developmentModeHandler" value="ENABLED"/>
+  <set-property name="gwt.logging.firebugHandler" value="ENABLED"/>
+  <set-property name="gwt.logging.popupHandler" value="DISABLED"/>
+  <set-property name="gwt.logging.systemHandler" value="ENABLED"/>
+  <set-property name="gwt.logging.hasWidgetsHandler" value="DISABLED"/>
+  <set-property name="gwt.logging.simpleRemoteHandler" value="DISABLED"/>
+
+  <!-- Enable remote logger -->
+  <!--<set-property name="gwt.logging.simpleRemoteHandler" value="ENABLED" />-->
+
+  <set-property name="compiler.emulatedStack" value="true"/>
+  <set-configuration-property name="compiler.emulatedStack.recordLineNumbers" value="true"/>
+  <set-configuration-property name="compiler.emulatedStack.recordFileNames" value="true"/>
+
+  <!--
+    Whether or not the compiler should alter Enum.name() to return
+    ordinal() as a way of obfuscating Enum field identifiers.
+
+    Can reduce javascript size if use lots of enums or large enums
+  -->
+  <set-configuration-property name="compiler.enum.obfuscate.names" value="false"/>
+</module>

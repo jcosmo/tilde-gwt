@@ -1,0 +1,25 @@
+<% user_code = "MYUSER" %>
+<% prefix = "#{user_code}_" %>
+devhost: &devhost
+  adapter: mssql
+  appname: <%= user_code %>
+  username: stock-dev
+  password: letmein
+  timeout: 50000
+  host: vw-firesql-104.fire.dse.vic.gov.au
+  instance: mssql01
+  force_drop: true
+  no_create: false
+
+development:
+  database: <%= prefix %>CALENDAR_DEV
+  <<: *devhost
+
+test:
+  database: <%= prefix %>CALENDAR_TEST
+  <<: *devhost
+
+import:
+  database: PROD_CLONE_CALENDAR
+  <<: *devhost
+

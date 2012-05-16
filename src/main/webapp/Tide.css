@@ -1,0 +1,49 @@
+input:not([type="image"]), textarea, select{
+    box-sizing: border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    border: 1px solid #d3d3d3;
+}
+
+input:not([type="image"]){
+    padding: 2px;
+}
+
+.buttonPanel{
+    float:right;
+    margin-top: 15px;
+}
+
+.buttonPanel td{
+    padding-left: 10px;
+}
+
+.invalid{
+    background-color: #f9cbcb;
+}
+
+.dialog .contents{
+    margin: 10px;
+}
+
+.dialog .hspace{
+    margin-right: 5px;
+}
+
+.dialog .vspace{
+    margin-top: 15px;
+}
+
+.calendarItem{
+    vertical-align: middle;
+}
+
+.calendarItem .colourBlock{
+    height: 16px;
+    width: 16px;
+    float:left;
+    background-color: red;
+    margin-right: 10px;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}

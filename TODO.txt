@@ -1,0 +1,12 @@
+* Import ical4j library for sending vCalendar cards
+ - Dependency = org.mnode.ical4j:ical4j:jar:1.0.3
+ - http://ical4j.sourceforge.net/index.html
+
+* Support Recurrence Rule as indicated by iCal standard
+ - http://www.kanzaki.com/docs/ical/rrule.html
+ - http://www.kanzaki.com/docs/ical/exrule.html
+
+* Use recurrence library to instantiate events.
+  See http://code.google.com/p/google-rfc-2445/wiki/LifeOfARecurrence
+
+* Update setup.bat to ruby script and import configuration from database.yml

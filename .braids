@@ -1,0 +1,15 @@
+--- 
+vendor/plugins/dbt: 
+  branch: master
+  remote: master/braid/vendor/plugins/dbt
+  revision: 81d2cc6b4bb5b721f5e9bcc2fc60fbd2332d7721
+  squashed: true
+  type: git
+  url: git://github.com/stocksoftware/dbt.git
+vendor/plugins/domgen: 
+  branch: master
+  remote: master/braid/vendor/plugins/domgen
+  revision: 6e9cd0bd6ed46e115a74a1df4d16e0cbbb6577ea
+  squashed: true
+  type: git
+  url: git://github.com/stocksoftware/domgen.git
