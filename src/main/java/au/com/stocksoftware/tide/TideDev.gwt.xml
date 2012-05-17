@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to='calendar'>
+<module rename-to='tide'>
   <inherits name='au.com.stocksoftware.tide.Tide'/>
   <!-- Compile a single permutation for all platforms -->
   <collapse-all-properties/>

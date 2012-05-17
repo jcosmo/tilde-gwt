@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to='calendar'>
+<module rename-to='tide'>
   <inherits name='com.google.gwt.user.User'/>
   <inherits name="com.google.gwt.activity.Activity"/>
   <inherits name="com.google.gwt.place.Place"/>
   <inherits name="com.google.gwt.inject.Inject"/>
   <inherits name="com.google.gwt.logging.Logging"/>
-  <inherits name='com.bradrydzewski.gwt.calendar.Calendar'/>
-  <inherits name='com.bradrydzewski.gwt.calendar.theme.google.Google'/>
+  <!--<inherits name='com.bradrydzewski.gwt.calendar.Calendar'/>-->
+  <!--<inherits name='com.bradrydzewski.gwt.calendar.theme.google.Google'/>-->
   <inherits name="org.realityforge.replicant.Replicant"/>
 
   <entry-point class='au.com.stocksoftware.tide.client.Tide'/>
