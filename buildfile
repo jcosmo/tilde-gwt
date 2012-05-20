@@ -19,8 +19,7 @@ define('tide', :layout => layout) do
                :javax_annotation,
                :jackson_core,
                :jackson_mapper,
-               :gwt_cal,
-               :gwt_dnd,
+               :gxt,
                :javax_annotation,
                :gwt_user,
                :google_guice,
@@ -33,14 +32,14 @@ define('tide', :layout => layout) do
                :gwt_user
 
 
+
   test.with :mockito, :guiceyloops, :eclipselink, :jtds
   test.using :testng
 
-  tide_module = gwt(["eweb.tide.CalendarDev"],
+  tide_module = gwt(["au.com.stocksoftware.tide.TideDev"],
                         :dependencies => [project.compile.dependencies,
                                           project.compile.target,
-                                          :gwt_cal,
-                                          :gwt_dnd,
+                                          :gxt,
                                           :replicant,
                                           :replicant_sources,
                                           :javax_validation,

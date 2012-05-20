@@ -20,7 +20,7 @@ public class TideClientModule
   {
     bind( EventBus.class ).to( SimpleEventBus.class ).asEagerSingleton();
     bind( AdminPanel.class ).asEagerSingleton();
-    bindPresenter( AdminView.Presenter.class, AdminPresenter.class, AdminView.class, AdminUI.class );
+    //bindPresenter( AdminView.Presenter.class, AdminPresenter.class, AdminView.class, AdminUI.class );
     bindNamedService( "GLOBAL", AsyncCallback.class, GlobalAsyncCallback.class );
   }
 

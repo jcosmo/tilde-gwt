@@ -5,11 +5,10 @@
   <inherits name="com.google.gwt.place.Place"/>
   <inherits name="com.google.gwt.inject.Inject"/>
   <inherits name="com.google.gwt.logging.Logging"/>
-  <!--<inherits name='com.bradrydzewski.gwt.calendar.Calendar'/>-->
-  <!--<inherits name='com.bradrydzewski.gwt.calendar.theme.google.Google'/>-->
   <inherits name="org.realityforge.replicant.Replicant"/>
+  <inherits name="com.sencha.gxt.ui.GXT"/>
 
-  <entry-point class='au.com.stocksoftware.tide.client.Tide'/>
+  <entry-point class='au.com.stocksoftware.tide.client.view.ui.AdminUI'/>
 
   <source path='client'/>
   <source path='shared'/>
