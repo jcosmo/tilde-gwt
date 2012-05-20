@@ -5,15 +5,18 @@
   <inherits name="com.google.gwt.place.Place"/>
   <inherits name="com.google.gwt.inject.Inject"/>
   <inherits name="com.google.gwt.logging.Logging"/>
-  <inherits name="org.realityforge.replicant.Replicant"/>
+  <!--<inherits name="org.realityforge.replicant.Replicant"/>-->
   <inherits name="com.sencha.gxt.ui.GXT"/>
+  <inherits name="com.sencha.gwt.uibinder.UiBinder" />
 
-  <entry-point class='au.com.stocksoftware.tide.client.view.ui.AdminUI'/>
+  <entry-point class='au.com.stocksoftware.tide.client.Tide'/>
 
   <source path='client'/>
   <source path='shared'/>
 
   <set-property name="gwt.logging.enabled" value="FALSE"/>
-
+  <set-configuration-property name="UiBinder.useLazyWidgetBuilders" value="true" />
+  <!--
   <set-configuration-property name="UiBinder.useSafeHtmlTemplates" value="true"/>
+  -->
 </module>

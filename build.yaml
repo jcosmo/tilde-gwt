@@ -43,6 +43,7 @@ artifacts:
   aopalliance: aopalliance:aopalliance:jar:1.0 # Required for guice
   gwt_gin: com.google.gwt.inject:gin:jar:1.5.0
   gxt: com.sencha:gxt:jar:3.0.0
+  gxt_uibinder: com.sencha:uibinder-bridge:jar:2.4.0
 
   #
   # Used to inject EE annotated classes in Guice
