@@ -1,20 +1,82 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder
-  xmlns:ui="urn:ui:com.google.gwt.uibinder"
-  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+             xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
   <ui:style>
-    .mainPanel {
-      margin: 20px;
+    .leftMenu {
+      border-top: solid 1px #99BBE8;
+      border-bottom: solid 1px #99BBE8;
     }
   </ui:style>
-  <g:HorizontalPanel styleName="{style.mainPanel}">
-    <g:cell width="200px">
-      <g:VerticalPanel ui:field="_userList" spacing="20">
-      </g:VerticalPanel>
-    </g:cell>
-    <g:DecoratorPanel height="100%">
-      <g:Label styleName="hspace">to</g:Label>
-    </g:DecoratorPanel>
-  </g:HorizontalPanel>
+  <ui:with type="com.sencha.gxt.core.client.util.Margins" field="outerMargins">
+    <ui:attributes top="20" right="20" bottom="20" left="20"/>
+  </ui:with>
+  <ui:with type="com.sencha.gxt.core.client.util.Margins" field="northMargins">
+    <ui:attributes top="0" right="0" bottom="0" left="0"/>
+  </ui:with>
+  <ui:with type="com.sencha.gxt.core.client.util.Margins" field="westMargins">
+    <ui:attributes top="0" right="0" bottom="0" left="0"/>
+  </ui:with>
+  <ui:with type="com.sencha.gxt.core.client.util.Margins" field="centerMargins">
+    <ui:attributes top="0" right="5" bottom="0" left="0"/>
+  </ui:with>
+  <ui:with type="com.sencha.gxt.core.client.util.Margins" field="southMargins">
+    <ui:attributes top="0" right="0" bottom="0" left="0"/>
+  </ui:with>
+  <ui:with type="com.sencha.gxt.core.client.util.Margins" field="menuItemMargins">
+    <ui:attributes top="5" right="5" bottom="0" left="5"/>
+  </ui:with>
+
+  <ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="outerData">
+    <ui:attributes margins="{outerMargins}"/>
+  </ui:with>
+  <ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="northData">
+    <ui:attributes size="75" margins="{northMargins}"/>
+  </ui:with>
+  <ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="westData">
+    <ui:attributes size="150" margins="{westMargins}"/>
+  </ui:with>
+  <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="menuItemData">
+    <ui:attributes margins="{menuItemMargins}"/>
+  </ui:with>
+  <ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="centerData">
+    <ui:attributes margins="{centerMargins}"/>
+  </ui:with>
+  <ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="southData">
+    <ui:attributes size="20" margins="{southMargins}"/>
+  </ui:with>
+
+
+  <container:SimpleContainer>
+    <container:child layoutData="{outerData}">
+      <container:BorderLayoutContainer borders="true">
+        <container:north layoutData="{northData}">
+          <g:HTMLPanel>
+            <g:Label>Header bar to go here</g:Label>
+          </g:HTMLPanel>
+        </container:north>
+        <container:west layoutData="{westData}">
+          <container:VerticalLayoutContainer itemId="foo" addStyleNames="{style.leftMenu}" >
+            <container:child layoutData="{menuItemData}">
+              <g:Hyperlink HTML="Users" targetHistoryToken="UsersAdmin"/>
+            </container:child>
+            <container:child layoutData="{menuItemData}">
+              <g:Hyperlink HTML="Projects" targetHistoryToken="ProjectsAdmin"/>
+            </container:child>
+          </container:VerticalLayoutContainer>
+        </container:west>
+        <container:center layoutData="{centerData}">
+          <gxt:ContentPanel headerVisible="false">
+          </gxt:ContentPanel>
+        </container:center>
+        <container:south layoutData="{southData}">
+          <g:HTMLPanel>
+            <g:Label>Footer to go here</g:Label>
+          </g:HTMLPanel>
+        </container:south>
+      </container:BorderLayoutContainer>
+    </container:child>
+  </container:SimpleContainer>
 </ui:UiBinder>

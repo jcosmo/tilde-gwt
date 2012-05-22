@@ -1,11 +1,11 @@
 package au.com.stocksoftware.tide.client.view.ui;
 
-import com.google.gwt.user.client.ui.SimplePanel;
 import au.com.stocksoftware.tide.client.view.AdminView;
+import com.sencha.gxt.widget.core.client.container.Viewport;
 import javax.inject.Inject;
 
 public class AdminPanel
-  extends SimplePanel
+  extends Viewport
 {
   @Inject
   public AdminPanel( final AdminView view )

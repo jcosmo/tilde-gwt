@@ -42,8 +42,8 @@ artifacts:
   google_guice_assistedinject: com.google.inject.extensions:guice-assistedinject:jar:3.0
   aopalliance: aopalliance:aopalliance:jar:1.0 # Required for guice
   gwt_gin: com.google.gwt.inject:gin:jar:1.5.0
-  gwt_cal: com.bradrydzewski.gwt.calendar:gwt-cal:jar:0.9.3
-  gwt_dnd: com.allen-sauer.gwt.dnd:gwt-dnd:jar:3.1.2
+  gxt: com.sencha:gxt:jar:3.0.0
+  gxt_uibinder: com.sencha:uibinder-bridge:jar:2.4.0
 
   #
   # Used to inject EE annotated classes in Guice

@@ -5,13 +5,17 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiTemplate;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.sencha.gxt.widget.core.client.Component;
 
 public class AdminUI
   extends AbstractUI<AdminView.Presenter>
-  implements AdminView
+  implements AdminView, IsWidget
 {
+  private Component _widget;
+
   @Override
   public void setUserList( final String users )
   {
@@ -19,23 +23,21 @@ public class AdminUI
 
   @UiTemplate( "AdminView.ui.xml" )
   interface AdminViewUiBinder
-    extends UiBinder<Widget, AdminUI>
+    extends UiBinder<Component, AdminUI>
   {
+
   }
 
   private static AdminViewUiBinder _uiBinder = GWT.create( AdminViewUiBinder.class );
 
-  @UiField
-  VerticalPanel _userList;
-
   public AdminUI()
   {
-    initWidget( _uiBinder.createAndBindUi( this ) );
+    _widget = _uiBinder.createAndBindUi( this );
   }
 
   @Override
   public Widget asWidget()
   {
-    return this;
+    return _widget;
   }
 }
