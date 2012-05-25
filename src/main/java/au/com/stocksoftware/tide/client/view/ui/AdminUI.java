@@ -6,7 +6,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.widget.core.client.Component;
 
@@ -16,9 +16,13 @@ public class AdminUI
 {
   private Component _widget;
 
+  @UiField
+  Label _taskLabel;
+
   @Override
-  public void setUserList( final String users )
+  public Label getTaskLabel()
   {
+    return _taskLabel;
   }
 
   @UiTemplate( "AdminView.ui.xml" )

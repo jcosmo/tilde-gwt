@@ -69,6 +69,7 @@
         </container:west>
         <container:center layoutData="{centerData}">
           <gxt:ContentPanel headerVisible="false">
+            <g:Label ui:field="_taskLabel">Starting Up</g:Label>
           </gxt:ContentPanel>
         </container:center>
         <container:south layoutData="{southData}">

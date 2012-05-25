@@ -6,6 +6,7 @@ import au.com.stocksoftware.tide.client.view.ui.AdminPanel;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 
 public final class Tide
   implements EntryPoint
@@ -16,7 +17,13 @@ public final class Tide
     TideGwtRpcServicesModule.initialize( GWT.getModuleName(), null );
     final TideGinjector injector = GWT.create( TideGinjector.class );
 
-    final AdminPanel mainPanel = injector.getMainPanel();
+    injector.getApplication().activate();
+
+    final SimplePanel mainPanel = injector.getMainPanel();
+
     RootPanel.get().add( mainPanel );
+
+      // Goes to place represented on URL or default place
+    injector.getPlaceHistoryHandler().handleCurrentHistory();
   }
 }
