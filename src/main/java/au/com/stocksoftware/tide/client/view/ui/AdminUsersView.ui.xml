@@ -1,0 +1,18 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+  <container:SimpleContainer>
+    <container:child>
+      <container:BorderLayoutContainer borders="true">
+        <container:north>
+          <g:Label>Foo</g:Label>
+        </container:north>
+        <container:west>
+          <g:Label>Bar</g:Label>
+        </container:west>
+      </container:BorderLayoutContainer>
+    </container:child>
+  </container:SimpleContainer>
+</ui:UiBinder>

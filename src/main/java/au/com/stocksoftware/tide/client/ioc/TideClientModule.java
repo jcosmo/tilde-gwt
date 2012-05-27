@@ -1,14 +1,17 @@
 package au.com.stocksoftware.tide.client.ioc;
 
 import au.com.stocksoftware.tide.client.activity.AdminActivity;
+import au.com.stocksoftware.tide.client.activity.AdminUsersPresenter;
 import au.com.stocksoftware.tide.client.place.AdminPlace;
 import au.com.stocksoftware.tide.client.place.AdminPlace.AdminTask;
 import au.com.stocksoftware.tide.client.presenter.GlobalAsyncCallback;
+import au.com.stocksoftware.tide.client.view.AdminUsersView;
 import au.com.stocksoftware.tide.client.view.AdminView;
 import au.com.stocksoftware.tide.client.view.Presenter;
 import au.com.stocksoftware.tide.client.view.View;
 import au.com.stocksoftware.tide.client.view.ui.AdminPanel;
 import au.com.stocksoftware.tide.client.view.ui.AdminUI;
+import au.com.stocksoftware.tide.client.view.ui.AdminUsersUI;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
@@ -32,6 +35,7 @@ public class TideClientModule
     bind( ApplicationActivityMapper.class ).asEagerSingleton();
 
     bindPresenter( AdminView.Presenter.class, AdminActivity.class, AdminView.class, AdminUI.class );
+    bindPresenter( AdminUsersView.Presenter.class, AdminUsersPresenter.class, AdminUsersView.class, AdminUsersUI.class );
     bindNamedService( "GLOBAL", AsyncCallback.class, GlobalAsyncCallback.class );
 
     bind( Application.class ).asEagerSingleton();

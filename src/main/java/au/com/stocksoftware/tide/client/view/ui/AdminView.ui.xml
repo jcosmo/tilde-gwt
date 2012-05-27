@@ -9,6 +9,13 @@
       border-top: solid 1px #99BBE8;
       border-bottom: solid 1px #99BBE8;
     }
+    .contentArea {
+      border-top: solid 1px #99BBE8;
+      border-left: solid 1px #99BBE8;
+      border-bottom: solid 1px #99BBE8;
+      padding: 0.5em;
+      background: white;
+    }
   </ui:style>
   <ui:with type="com.sencha.gxt.core.client.util.Margins" field="outerMargins">
     <ui:attributes top="20" right="20" bottom="20" left="20"/>
@@ -20,7 +27,7 @@
     <ui:attributes top="0" right="0" bottom="0" left="0"/>
   </ui:with>
   <ui:with type="com.sencha.gxt.core.client.util.Margins" field="centerMargins">
-    <ui:attributes top="0" right="5" bottom="0" left="0"/>
+    <ui:attributes top="0" right="0" bottom="0" left="0"/>
   </ui:with>
   <ui:with type="com.sencha.gxt.core.client.util.Margins" field="southMargins">
     <ui:attributes top="0" right="0" bottom="0" left="0"/>
@@ -60,17 +67,16 @@
         <container:west layoutData="{westData}">
           <container:VerticalLayoutContainer itemId="foo" addStyleNames="{style.leftMenu}" >
             <container:child layoutData="{menuItemData}">
-              <g:Hyperlink HTML="Users" targetHistoryToken="UsersAdmin"/>
+              <g:Hyperlink HTML="Users" ui:field="_usersLink"/>
             </container:child>
             <container:child layoutData="{menuItemData}">
-              <g:Hyperlink HTML="Projects" targetHistoryToken="ProjectsAdmin"/>
+              <g:Hyperlink HTML="Projects" ui:field="_projectsLink"/>
             </container:child>
           </container:VerticalLayoutContainer>
         </container:west>
         <container:center layoutData="{centerData}">
-          <gxt:ContentPanel headerVisible="false">
-            <g:Label ui:field="_taskLabel">Starting Up</g:Label>
-          </gxt:ContentPanel>
+          <container:SimpleContainer ui:field="_contentArea" addStyleNames="{style.contentArea}">
+          </container:SimpleContainer>
         </container:center>
         <container:south layoutData="{southData}">
           <g:HTMLPanel>

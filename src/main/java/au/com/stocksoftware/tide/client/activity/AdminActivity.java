@@ -39,20 +39,7 @@ public class AdminActivity
         return true;
       }
 
-      switch ( adminPlace.getTask() )
-      {
-        case START:
-          _view.getTaskLabel().setText( "Select something from the menu on the left" );
-          break;
-
-        case USERS:
-          _view.getTaskLabel().setText( "Lets manage some users" );
-          break;
-
-        case PROJECTS:
-          _view.getTaskLabel().setText( "Nowhere near implemented" );
-          break;
-      }
+      _view.showTask( adminPlace.getTask() );
 
       _currentTask = adminPlace.getTask();
 
