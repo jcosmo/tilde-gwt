@@ -1,7 +1,5 @@
 package au.com.stocksoftware.tide.client.view.ui;
 
-import au.com.stocksoftware.tide.client.activity.AdminUsersPresenter;
-import au.com.stocksoftware.tide.client.ioc.TideGinjector;
 import au.com.stocksoftware.tide.client.place.AdminPlace;
 import au.com.stocksoftware.tide.client.place.AdminPlace.AdminTask;
 import au.com.stocksoftware.tide.client.view.AdminView;
@@ -50,14 +48,14 @@ public class AdminUI
     {
       _contentArea.remove( 0 );
     }
-    
+
     switch ( task )
     {
       case PROJECTS:
         _contentArea.setWidget( ensureProjectUI() );
         _currentView = task;
         break;
-      
+
       case USERS:
         _contentArea.setWidget( ensureUsersUI() );
         _currentView = task;
@@ -78,7 +76,7 @@ public class AdminUI
   {
     if ( null == _projectsUI )
     {
-      _projectsUI = new Label("This is the Projects UI!");
+      _projectsUI = new Label( "This is the Projects UI!" );
     }
     return _projectsUI;
   }
@@ -93,7 +91,7 @@ public class AdminUI
   private static AdminViewUiBinder _uiBinder = GWT.create( AdminViewUiBinder.class );
 
   @Inject
-  public AdminUI( final PlaceHistoryMapper  placeHistoryMapper )
+  public AdminUI( final PlaceHistoryMapper placeHistoryMapper )
   {
     _widget = _uiBinder.createAndBindUi( this );
     _usersLink.setTargetHistoryToken( placeHistoryMapper.getToken( new AdminPlace( AdminTask.USERS ) ) );
