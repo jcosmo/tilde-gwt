@@ -9,8 +9,8 @@ import au.com.stocksoftware.tide.client.view.AdminUsersView;
 import au.com.stocksoftware.tide.client.view.AdminView;
 import au.com.stocksoftware.tide.client.view.Presenter;
 import au.com.stocksoftware.tide.client.view.View;
-import au.com.stocksoftware.tide.client.view.ui.AdminPanel;
 import au.com.stocksoftware.tide.client.view.ui.AdminUI;
+import au.com.stocksoftware.tide.client.view.ui.AdminUsersPanel;
 import au.com.stocksoftware.tide.client.view.ui.AdminUsersUI;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
@@ -38,6 +38,7 @@ public class TideClientModule
     bindPresenter( AdminUsersView.Presenter.class, AdminUsersPresenter.class, AdminUsersView.class, AdminUsersUI.class );
     bindNamedService( "GLOBAL", AsyncCallback.class, GlobalAsyncCallback.class );
 
+    bind( AdminUsersPanel.class ).asEagerSingleton();
     bind( Application.class ).asEagerSingleton();
   }
 

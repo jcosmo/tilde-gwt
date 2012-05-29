@@ -10,13 +10,13 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
 import com.sencha.gxt.core.client.ValueProvider;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
 import com.sencha.gxt.widget.core.client.Component;
 import com.sencha.gxt.widget.core.client.ListView;
+import java.util.List;
 
 public class AdminUsersUI
   extends AbstractUI<AdminUsersView.Presenter>
@@ -26,7 +26,7 @@ public class AdminUsersUI
 
   @UiField
   ListView _userList;
-  
+
   @UiTemplate( "AdminUsersView.ui.xml" )
   interface AdminUsersViewUiBinder
     extends UiBinder<Component, AdminUsersUI>
@@ -35,10 +35,21 @@ public class AdminUsersUI
 
   private static AdminUsersViewUiBinder _uiBinder = GWT.create( AdminUsersViewUiBinder.class );
 
-  @Inject
   public AdminUsersUI( )
   {
     _widget = _uiBinder.createAndBindUi( this );
+  }
+
+  @Override
+  public void setUsers( final List<UserVO> users )
+  {
+    _userList.getStore().replaceAll( users );
+  }
+
+  @Override
+  public void clearUsers()
+  {
+    _userList.getStore().clear();
   }
 
   @Override

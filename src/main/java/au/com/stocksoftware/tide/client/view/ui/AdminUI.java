@@ -33,7 +33,8 @@ public class AdminUI
 
   private Label _projectsUI;
 
-  private AdminUsersUI _usersUI;
+  @Inject
+  private AdminUsersPanel _usersPanel;
 
   private AdminTask _currentView;
 
@@ -57,19 +58,11 @@ public class AdminUI
         break;
 
       case USERS:
-        _contentArea.setWidget( ensureUsersUI() );
+        _contentArea.setWidget( _usersPanel );
         _currentView = task;
+        _usersPanel.notifyShown();
         break;
     }
-  }
-
-  private IsWidget ensureUsersUI()
-  {
-    if ( null == _usersUI )
-    {
-      _usersUI = GWT.create( AdminUsersUI.class );
-    }
-    return _usersUI;
   }
 
   private IsWidget ensureProjectUI()
