@@ -5,18 +5,30 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
   <ui:style>
-    .userPanel {
+    .userPane {
       background: white;
     }
   </ui:style>
-  <container:SimpleContainer addStyleNames="{style.userPanel}">
+  <ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="northData">
+    <ui:attributes size="40"/>
+  </ui:with>
+
+  <container:SimpleContainer addStyleNames="{style.userPane}">
     <container:child>
       <container:BorderLayoutContainer borders="false">
         <container:west>
-          <gxt:ListView ui:field="_userList"/>
+          <container:BorderLayoutContainer borders="false">
+            <container:north layoutData="{northData}">
+              <g:Button text="Add User" ui:field="_addUserButton"/>
+            </container:north>
+            <container:center>
+              <gxt:ListView ui:field="_userList"/>
+            </container:center>
+          </container:BorderLayoutContainer>
         </container:west>
         <container:center>
-          <g:Label>Bar</g:Label>
+          <container:SimpleContainer ui:field="_userDisplay">
+          </container:SimpleContainer>
         </container:center>
       </container:BorderLayoutContainer>
     </container:child>

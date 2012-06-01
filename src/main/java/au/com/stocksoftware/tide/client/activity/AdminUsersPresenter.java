@@ -1,6 +1,7 @@
 package au.com.stocksoftware.tide.client.activity;
 
 import au.com.stocksoftware.tide.client.data_type.core.UserDTO;
+import au.com.stocksoftware.tide.client.entity.UserVO;
 import au.com.stocksoftware.tide.client.service.core.UserService;
 import au.com.stocksoftware.tide.client.service.util.Converter;
 import au.com.stocksoftware.tide.client.view.AdminUsersView;
@@ -31,5 +32,17 @@ public class AdminUsersPresenter
           _view.setUsers( Converter.userDTOsToVOs( result ) );
         }
       } );
+  }
+
+  @Override
+  public void addUserPressed()
+  {
+    _view.showAddUser();
+  }
+
+  @Override
+  public void userSelected( final UserVO user )
+  {
+    _view.showUser( user );
   }
 }

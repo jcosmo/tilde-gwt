@@ -14,6 +14,7 @@ public class AdminUsersPanel
   public AdminUsersPanel( final AdminUsersPresenter presenter, final AdminUsersView view )
   {
     _presenter = presenter;
+    view.setPresenter( presenter );
     add( view.asWidget() );
   }
 
