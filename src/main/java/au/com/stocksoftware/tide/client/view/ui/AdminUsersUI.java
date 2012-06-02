@@ -25,6 +25,7 @@ import com.sencha.gxt.widget.core.client.Component;
 import com.sencha.gxt.widget.core.client.ListView;
 import com.sencha.gxt.widget.core.client.container.SimpleContainer;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.form.TextField;
 import java.util.List;
 
 public class AdminUsersUI
@@ -40,7 +41,7 @@ public class AdminUsersUI
   Button _addUserButton;
 
   @UiField
-  SimpleContainer _userDisplay;
+  TextField _userName;
 
   Presenter _presenter;
 
@@ -78,13 +79,13 @@ public class AdminUsersUI
   @Override
   public void showAddUser()
   {
-    _userDisplay.add( new Label( "Add user pane!" ) );
+    _userName.setText( "Add user pane!" );
   }
 
   @Override
   public void showUser( final UserVO user )
   {
-    _userDisplay.add( new Label( "Now showing user " + user.getName() ) );
+    _userName.setText( user.getName() );
   }
 
   @Override
