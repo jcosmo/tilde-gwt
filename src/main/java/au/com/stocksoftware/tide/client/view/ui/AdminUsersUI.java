@@ -83,6 +83,7 @@ public class AdminUsersUI
   {
     _userList.getStore().replaceAll( users );
     resetView();
+    configureButtons( false, false, false, false );
   }
 
   @Override
@@ -90,19 +91,24 @@ public class AdminUsersUI
   {
     _userList.getStore().clear();
     resetView();
+    configureButtons( false, false, false, false );
   }
 
   private void resetView()
   {
-    /*
-    _editButton.setVisible( false );
-    _cancelButton.setVisible( false );
-    _passwordButton.setVisible( false );
-    _saveButton.setVisible( false );
-    */
     _userName.setText( "" );
     _userEmail.setText( "" );
     _userLogin.setText( "" );
+  }
+
+  private void configureButtons( final boolean edit, final boolean cancel, final boolean password, final boolean save )
+  {
+    _editButton.setVisible( edit );
+    _cancelButton.setVisible( cancel );
+    _passwordButton.setVisible( password );
+    _saveButton.setVisible( save );
+    _userContentPanel.getButtonBar().syncSize();
+    _userContentPanel.syncSize();
   }
 
   @Override
@@ -115,9 +121,8 @@ public class AdminUsersUI
   public void showAddUser()
   {
     resetView();
-    _userName.focus();
-    _addButton.setVisible( true );
-    _cancelButton.setVisible( true );
+    _userLogin.focus();
+    configureButtons( false, true, false, true );
   }
 
   @Override
@@ -127,8 +132,7 @@ public class AdminUsersUI
     _userLogin.setText( user.getLogin() );
     _userName.setText( user.getName() );
     _userEmail.setText( user.getEmail() );
-    _editButton.setVisible( true );
-    _passwordButton.setVisible( true );
+    configureButtons( false, true, true, true );
   }
 
   @Override
