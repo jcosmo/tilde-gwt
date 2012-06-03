@@ -24,6 +24,7 @@ import com.sencha.gxt.widget.core.client.Component;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.ListView;
 import com.sencha.gxt.widget.core.client.button.TextButton;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class AdminUsersUI
   ListView _userList;
 
   @UiField
-  Button _addButton;
+  TextButton _addButton;
 
   @UiField
   TextButton _editButton;
@@ -82,33 +83,14 @@ public class AdminUsersUI
   public void setUsers( final List<UserVO> users )
   {
     _userList.getStore().replaceAll( users );
-    resetView();
-    configureButtons( false, false, false, false );
+    clearCurrentUser();
   }
 
   @Override
   public void clearUsers()
   {
+    clearCurrentUser();
     _userList.getStore().clear();
-    resetView();
-    configureButtons( false, false, false, false );
-  }
-
-  private void resetView()
-  {
-    _userName.setText( "" );
-    _userEmail.setText( "" );
-    _userLogin.setText( "" );
-  }
-
-  private void configureButtons( final boolean edit, final boolean cancel, final boolean password, final boolean save )
-  {
-    _editButton.setVisible( edit );
-    _cancelButton.setVisible( cancel );
-    _passwordButton.setVisible( password );
-    _saveButton.setVisible( save );
-    _userContentPanel.getButtonBar().syncSize();
-    _userContentPanel.syncSize();
   }
 
   @Override
@@ -120,7 +102,8 @@ public class AdminUsersUI
   @Override
   public void showAddUser()
   {
-    resetView();
+    updateValues( null );
+    enableFields( true );
     _userLogin.focus();
     configureButtons( false, true, false, true );
   }
@@ -128,11 +111,31 @@ public class AdminUsersUI
   @Override
   public void showUser( final UserVO user )
   {
-    resetView();
-    _userLogin.setText( user.getLogin() );
-    _userName.setText( user.getName() );
-    _userEmail.setText( user.getEmail() );
+    updateValues( user );
+    enableFields( false );
+    configureButtons( true, false, true, false );
+  }
+
+  @Override
+  public void editUser( final UserVO user )
+  {
+    updateValues( user );
+    enableFields( true );
     configureButtons( false, true, true, true );
+  }
+
+  @Override
+  public void clearCurrentUser()
+  {
+    updateValues( null );
+    enableFields( false );
+    configureButtons( false, false, false, false );
+  }
+
+  @Override
+  public UserVO getCurrentValues()
+  {
+    return new UserVO( -1, _userLogin.getCurrentValue(), _userName.getCurrentValue(), _userEmail.getCurrentValue() );
   }
 
   @Override
@@ -171,13 +174,61 @@ public class AdminUsersUI
   }
 
   @UiHandler( { "_addButton" } )
-  public void onAddUserClicked( final ClickEvent event )
+  public void onAddUserClicked( final SelectEvent event )
   {
-    _presenter.addUserPressed();
+    _presenter.actionAddUser();
+  }
+
+  @UiHandler( { "_cancelButton" } )
+  public void onCancelClicked( final SelectEvent event )
+  {
+    _presenter.actionCancel();
+  }
+
+  @UiHandler( { "_editButton" } )
+  public void onEditClicked( final SelectEvent event )
+  {
+    _presenter.actionEdit();
+  }
+
+  @UiHandler( { "_passwordButton" } )
+  public void onPasswordClicked( final SelectEvent event )
+  {
+    _presenter.actionPassword();
+  }
+
+  @UiHandler( { "_saveButton" } )
+  public void onSaveClicked( final SelectEvent event )
+  {
+    _presenter.actionSave();
   }
 
   public void onUserSelected( final SelectionEvent<UserVO> event )
   {
-    _presenter.userSelected( event.getSelectedItem() );
+    _presenter.actionUserSelected( event.getSelectedItem() );
+  }
+
+  private void configureButtons( final boolean edit, final boolean cancel, final boolean password, final boolean save )
+  {
+    _editButton.setVisible( edit );
+    _cancelButton.setVisible( cancel );
+    _passwordButton.setVisible( password );
+    _saveButton.setVisible( save );
+    _userContentPanel.getButtonBar().syncSize();
+    _userContentPanel.syncSize();
+  }
+
+  private void enableFields( final boolean enabled )
+  {
+    _userLogin.setEnabled( enabled );
+    _userEmail.setEnabled( enabled );
+    _userName.setEnabled( enabled );
+  }
+
+  private void updateValues( final UserVO user )
+  {
+    _userLogin.setValue( null == user ? "" : user.getLogin() );
+    _userName.setValue( null == user ? "" : user.getName() );
+    _userEmail.setValue( null == user ? "" : user.getEmail() );
   }
 }

@@ -49,6 +49,10 @@ Domgen.repository(:Tide) do |repository|
 
       s.method(:UpdateUser) do |m|
         m.reference(:User)
+        m.string(:Login, 255)
+        m.string(:Name, 255)
+        m.string(:Email, 255)
+        m.returns(:struct, :referenced_struct => :UserDTO)
       end
 
       s.method(:SetPassword) do |m|

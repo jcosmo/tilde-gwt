@@ -17,11 +17,25 @@ public interface AdminUsersView
 
   void showUser( UserVO user );
 
+  void clearCurrentUser();
+  
+  UserVO getCurrentValues();
+
+  void editUser( UserVO user );
+
   interface Presenter
     extends au.com.stocksoftware.tide.client.view.Presenter
   {
-    void addUserPressed();
+    void actionAddUser();
     
-    void userSelected( UserVO user );
+    void actionUserSelected( UserVO user );
+
+    void actionCancel();
+
+    void actionEdit();
+
+    void actionSave();
+
+    void actionPassword();
   }
 }

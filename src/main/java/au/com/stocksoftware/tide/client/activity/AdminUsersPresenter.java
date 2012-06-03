@@ -18,6 +18,8 @@ public class AdminUsersPresenter
 
   @Inject
   private UserService _userService;
+  private UserVO _currentUser;
+  private boolean _newUser;
 
   public void refreshUsers()
   {
@@ -35,14 +37,74 @@ public class AdminUsersPresenter
   }
 
   @Override
-  public void addUserPressed()
+  public void actionAddUser()
   {
+    _newUser = true;
+    _currentUser = null;
     _view.showAddUser();
   }
 
   @Override
-  public void userSelected( final UserVO user )
+  public void actionUserSelected( final UserVO user )
   {
-    _view.showUser( user );
+    _newUser = false;
+    _currentUser = user;
+    _view.showUser( _currentUser );
+  }
+
+  @Override
+  public void actionCancel()
+  {
+    _newUser = false;
+    _currentUser = null;
+    _view.clearCurrentUser();
+  }
+
+  @Override
+  public void actionEdit()
+  {
+    if ( null != _currentUser )
+    {
+      _view.editUser( _currentUser );
+    }
+  }
+
+  @Override
+  public void actionSave()
+  {
+    final UserVO newValues = _view.getCurrentValues();
+    if ( null != _currentUser )
+    {
+      _userService.updateUser( _currentUser.getId(), newValues.getLogin(), newValues.getName(), newValues.getEmail(),
+                               new AsyncCallback<UserDTO>()
+                               {
+                                 @Override
+                                 public void onSuccess( final UserDTO updatedUser )
+                                 {
+                                   _currentUser = null;
+                                   _view.clearCurrentUser();
+                                   refreshUsers();
+                                 }
+                               } );
+    }
+    else if ( _newUser )
+    {
+      _userService.addUser( newValues.getLogin(), newValues.getName(), "password", newValues.getEmail(),
+                            new AsyncCallback<UserDTO>()
+                            {
+                              @Override
+                              public void onSuccess( final UserDTO newUser )
+                              {
+                                _newUser = false;
+                                _view.clearCurrentUser();
+                                refreshUsers();
+                              }
+                            } );
+    }
+  }
+
+  @Override
+  public void actionPassword()
+  {
   }
 }

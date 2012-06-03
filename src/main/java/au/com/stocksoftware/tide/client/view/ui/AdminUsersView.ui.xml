@@ -12,9 +12,6 @@
       background: white;
     }
   </ui:style>
-  <ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="northData">
-    <ui:attributes size="40"/>
-  </ui:with>
 
   <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData">
     <ui:attributes width="1" height="-1"/>
@@ -24,42 +21,46 @@
     <ui:attributes width="1" height="130"/>
   </ui:with>
 
+  <!-- TODO, width is not working -->
+  <ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="userListLayoutData">
+    <ui:attributes size="300"/>
+  </ui:with>
+
   <container:SimpleContainer addStyleNames="{style.userPane}">
     <container:child>
       <container:BorderLayoutContainer borders="false">
-        <container:west>
-          <container:BorderLayoutContainer borders="false">
-            <container:north layoutData="{northData}">
-              <g:Button text="Add User" ui:field="_addButton"/>
-            </container:north>
-            <container:center>
-              <gxt:ListView ui:field="_userList"/>
-            </container:center>
-          </container:BorderLayoutContainer>
+        <container:west layoutData="{userListLayoutData}">
+          <c:ContentPanel width="300" headerVisible="false" borders="false" bodyBorder="false"
+                          bodyStyle="background: none; padding: 5px">
+            <gxt:ListView ui:field="_userList" height="150" width="300"/>
+            <c:button>
+              <button:TextButton text="New User" ui:field="_addButton"/>
+            </c:button>
+          </c:ContentPanel>
         </container:west>
         <container:center>
           <g:VerticalPanel spacing="10">
-            <c:ContentPanel width="350" height="120" headerVisible="false" borders="false" bodyBorder="false"
+            <c:ContentPanel width="280" height="120" headerVisible="false" borders="false" bodyBorder="false"
                             bodyStyle="background: none; padding: 5px" ui:field="_userContentPanel">
               <container:VerticalLayoutContainer>
                 <container:child layoutData="{verticalLayoutData}">
                   <form:FieldLabel text="Login">
                     <form:widget>
-                      <form:TextField ui:field="_userLogin" allowBlank="false"/>
+                      <form:TextField ui:field="_userLogin"/>
                     </form:widget>
                   </form:FieldLabel>
                 </container:child>
                 <container:child layoutData="{verticalLayoutData}">
                   <form:FieldLabel text="Name">
                     <form:widget>
-                      <form:TextField ui:field="_userName" allowBlank="false"/>
+                      <form:TextField ui:field="_userName"/>
                     </form:widget>
                   </form:FieldLabel>
                 </container:child>
                 <container:child layoutData="{verticalLayoutData}">
                   <form:FieldLabel text="Email">
                     <form:widget>
-                      <form:TextField ui:field="_userEmail" allowBlank="false"/>
+                      <form:TextField ui:field="_userEmail"/>
                     </form:widget>
                   </form:FieldLabel>
                 </container:child>

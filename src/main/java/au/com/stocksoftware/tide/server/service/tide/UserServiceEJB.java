@@ -1,10 +1,12 @@
 package au.com.stocksoftware.tide.server.service.tide;
 
+import au.com.stocksoftware.tide.server.entity.core.UserComparator;
 import au.com.stocksoftware.tide.server.data_type.core.UserDTO;
 import au.com.stocksoftware.tide.server.entity.core.User;
 import au.com.stocksoftware.tide.server.entity.core.dao.UserDAO;
 import au.com.stocksoftware.tide.server.service.core.UserService;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.ejb.EJB;
@@ -23,6 +25,8 @@ public class UserServiceEJB
   public List<UserDTO> getUsers()
   {
     final List<User> users = _userDAO.findAll();
+    Collections.sort( users, UserComparator.COMPARATOR );
+
     final List<UserDTO> result = new ArrayList<UserDTO>( users.size() );
     for ( final User user : users )
     {
@@ -49,13 +53,17 @@ public class UserServiceEJB
   }
 
   @Override
-  public void updateUser( @Nonnull final User updatedUser )
+  public UserDTO updateUser( @Nonnull final User ref,
+                             @Nonnull final String login,
+                             @Nonnull final String name,
+                             @Nonnull final String email )
   {
-    final User user = _userDAO.findByID( updatedUser.getID() );
-    user.setLogin( updatedUser.getLogin() );
-    user.setName( updatedUser.getName() );
-    user.setEmail( updatedUser.getEmail() );
+    final User user = _userDAO.findByID( ref.getID() );
+    user.setLogin( login );
+    user.setName( name );
+    user.setEmail( email );
     _userDAO.persist( user );
+    return new UserDTO( user.getID(), user.getLogin(), user.getName(), user.getEmail() );
   }
 
   @Override
