@@ -16,7 +16,10 @@ public final class Converter
     final List<UserVO> result = new ArrayList<UserVO>( dtos.size() );
     for ( final UserDTO dto : dtos )
     {
-      result.add( new UserVO( dto.getID(), dto.getName() ) );
+      result.add( new UserVO( dto.getID(),
+                              dto.getLogin(),
+                              dto.getName(),
+                              dto.getEmail() ) );
     }
     return result;
   }

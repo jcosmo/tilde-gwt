@@ -15,16 +15,15 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.core.client.ValueProvider;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
 import com.sencha.gxt.widget.core.client.Component;
+import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.ListView;
-import com.sencha.gxt.widget.core.client.container.SimpleContainer;
-import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import java.util.List;
 
@@ -38,11 +37,32 @@ public class AdminUsersUI
   ListView _userList;
 
   @UiField
-  Button _addUserButton;
+  Button _addButton;
+
+  @UiField
+  TextButton _editButton;
+
+  @UiField
+  TextButton _passwordButton;
+
+  @UiField
+  TextButton _saveButton;
+
+  @UiField
+  TextButton _cancelButton;
 
   @UiField
   TextField _userName;
 
+  @UiField
+  TextField _userEmail;
+
+  @UiField
+  TextField _userLogin;
+
+  @UiField
+  ContentPanel _userContentPanel;
+  
   Presenter _presenter;
 
   @UiTemplate( "AdminUsersView.ui.xml" )
@@ -62,12 +82,27 @@ public class AdminUsersUI
   public void setUsers( final List<UserVO> users )
   {
     _userList.getStore().replaceAll( users );
+    resetView();
   }
 
   @Override
   public void clearUsers()
   {
     _userList.getStore().clear();
+    resetView();
+  }
+
+  private void resetView()
+  {
+    /*
+    _editButton.setVisible( false );
+    _cancelButton.setVisible( false );
+    _passwordButton.setVisible( false );
+    _saveButton.setVisible( false );
+    */
+    _userName.setText( "" );
+    _userEmail.setText( "" );
+    _userLogin.setText( "" );
   }
 
   @Override
@@ -79,13 +114,21 @@ public class AdminUsersUI
   @Override
   public void showAddUser()
   {
-    _userName.setText( "Add user pane!" );
+    resetView();
+    _userName.focus();
+    _addButton.setVisible( true );
+    _cancelButton.setVisible( true );
   }
 
   @Override
   public void showUser( final UserVO user )
   {
+    resetView();
+    _userLogin.setText( user.getLogin() );
     _userName.setText( user.getName() );
+    _userEmail.setText( user.getEmail() );
+    _editButton.setVisible( true );
+    _passwordButton.setVisible( true );
   }
 
   @Override
@@ -123,7 +166,7 @@ public class AdminUsersUI
     ValueProvider<UserVO, String> name();
   }
 
-  @UiHandler( { "_addUserButton" } )
+  @UiHandler( { "_addButton" } )
   public void onAddUserClicked( final ClickEvent event )
   {
     _presenter.addUserPressed();

@@ -23,24 +23,39 @@ public class UserServiceEJB
   public List<UserDTO> getUsers()
   {
     final List<User> users = _userDAO.findAll();
-    final List<UserDTO> result = new ArrayList<UserDTO>( users.size() ); 
+    final List<UserDTO> result = new ArrayList<UserDTO>( users.size() );
     for ( final User user : users )
     {
-      result.add( new UserDTO( user.getID(), user.getName() ) );
+      result.add( new UserDTO( user.getID(), user.getLogin(), user.getName(), user.getEmail() ) );
     }
     return result;
   }
 
   @Override
   @Nonnull
-  public UserDTO addUser( @Nonnull final String name, @Nonnull final String password )
+  public UserDTO addUser( @Nonnull final String login,
+                          @Nonnull final String name,
+                          @Nonnull final String password,
+                          @Nonnull final String email )
   {
     final User user = new User();
+    user.setLogin( login );
     user.setName( name );
     user.setPassword( password );
+    user.setEmail( email );
     _userDAO.persist( user );
 
-    return new UserDTO( user.getID(), user.getName() );
+    return new UserDTO( user.getID(), user.getLogin(), user.getName(), user.getEmail() );
+  }
+
+  @Override
+  public void updateUser( @Nonnull final User updatedUser )
+  {
+    final User user = _userDAO.findByID( updatedUser.getID() );
+    user.setLogin( updatedUser.getLogin() );
+    user.setName( updatedUser.getName() );
+    user.setEmail( updatedUser.getEmail() );
+    _userDAO.persist( user );
   }
 
   @Override

@@ -19,14 +19,19 @@ Domgen.repository(:Tide) do |repository|
 
     data_module.entity(:User) do |t|
       t.integer(:ID, :primary_key => true)
+      t.string(:Login, 255)
       t.string(:Name, 255)
+      t.string(:Email, 255)
       t.string(:Password, 255)
+      t.unique_constraint([:Login])
       t.unique_constraint([:Name])
     end
 
     data_module.struct(:UserDTO) do |s|
       s.integer(:ID)
+      s.text(:Login)
       s.text(:Name)
+      s.text(:Email)
     end
 
     data_module.service(:UserService) do |s|
@@ -35,9 +40,15 @@ Domgen.repository(:Tide) do |repository|
       end
 
       s.method(:AddUser) do |m|
+        m.string(:Login, 255)
         m.string(:Name, 255)
         m.string(:Password, 255)
+        m.string(:Email, 255)
         m.returns(:struct, :referenced_struct => :UserDTO)
+      end
+
+      s.method(:UpdateUser) do |m|
+        m.reference(:User)
       end
 
       s.method(:SetPassword) do |m|

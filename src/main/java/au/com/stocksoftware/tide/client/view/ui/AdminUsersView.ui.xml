@@ -21,7 +21,7 @@
   </ui:with>
 
   <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="descriptionLayoutData">
-    <ui:attributes width="1" height="100"/>
+    <ui:attributes width="1" height="130"/>
   </ui:with>
 
   <container:SimpleContainer addStyleNames="{style.userPane}">
@@ -30,7 +30,7 @@
         <container:west>
           <container:BorderLayoutContainer borders="false">
             <container:north layoutData="{northData}">
-              <g:Button text="Add User" ui:field="_addUserButton"/>
+              <g:Button text="Add User" ui:field="_addButton"/>
             </container:north>
             <container:center>
               <gxt:ListView ui:field="_userList"/>
@@ -39,21 +39,42 @@
         </container:west>
         <container:center>
           <g:VerticalPanel spacing="10">
-            <c:ContentPanel width="350" headerVisible="false" borders="false" bodyBorder="false" bodyStyle="background: none; padding: 5px">
+            <c:ContentPanel width="350" height="120" headerVisible="false" borders="false" bodyBorder="false"
+                            bodyStyle="background: none; padding: 5px" ui:field="_userContentPanel">
               <container:VerticalLayoutContainer>
+                <container:child layoutData="{verticalLayoutData}">
+                  <form:FieldLabel text="Login">
+                    <form:widget>
+                      <form:TextField ui:field="_userLogin" allowBlank="false"/>
+                    </form:widget>
+                  </form:FieldLabel>
+                </container:child>
                 <container:child layoutData="{verticalLayoutData}">
                   <form:FieldLabel text="Name">
                     <form:widget>
-                      <form:TextField ui:field="_userName" allowBlank="false" emptyText="Select a user or 'add'"/>
+                      <form:TextField ui:field="_userName" allowBlank="false"/>
+                    </form:widget>
+                  </form:FieldLabel>
+                </container:child>
+                <container:child layoutData="{verticalLayoutData}">
+                  <form:FieldLabel text="Email">
+                    <form:widget>
+                      <form:TextField ui:field="_userEmail" allowBlank="false"/>
                     </form:widget>
                   </form:FieldLabel>
                 </container:child>
               </container:VerticalLayoutContainer>
               <c:button>
-                <button:TextButton text="Save"/>
+                <button:TextButton text="Edit" ui:field="_editButton"/>
               </c:button>
               <c:button>
-                <button:TextButton text="Cancel"/>
+                <button:TextButton text="Change Password" ui:field="_passwordButton"/>
+              </c:button>
+              <c:button>
+                <button:TextButton text="Save" ui:field="_saveButton"/>
+              </c:button>
+              <c:button>
+                <button:TextButton text="Cancel" ui:field="_cancelButton"/>
               </c:button>
             </c:ContentPanel>
           </g:VerticalPanel>
