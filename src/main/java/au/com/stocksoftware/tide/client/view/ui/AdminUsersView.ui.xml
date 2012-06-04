@@ -75,6 +75,9 @@
                 <button:TextButton text="Save" ui:field="_saveButton"/>
               </c:button>
               <c:button>
+                <button:TextButton text="Delete" ui:field="_deleteButton"/>
+              </c:button>
+              <c:button>
                 <button:TextButton text="Cancel" ui:field="_cancelButton"/>
               </c:button>
             </c:ContentPanel>

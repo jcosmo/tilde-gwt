@@ -53,6 +53,12 @@ public class UserServiceEJB
   }
 
   @Override
+  public void deleteUser( @Nonnull final User user )
+  {
+    _userDAO.remove( user );
+  }
+
+  @Override
   public UserDTO updateUser( @Nonnull final User ref,
                              @Nonnull final String login,
                              @Nonnull final String name,

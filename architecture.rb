@@ -47,6 +47,10 @@ Domgen.repository(:Tide) do |repository|
         m.returns(:struct, :referenced_struct => :UserDTO)
       end
 
+      s.method(:DeleteUser) do |m|
+        m.reference(:User)
+      end
+
       s.method(:UpdateUser) do |m|
         m.reference(:User)
         m.string(:Login, 255)

@@ -37,5 +37,7 @@ public interface AdminUsersView
     void actionSave();
 
     void actionPassword();
+
+    void actionDelete();
   }
 }

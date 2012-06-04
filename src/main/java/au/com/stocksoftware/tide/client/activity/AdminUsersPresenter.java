@@ -107,4 +107,23 @@ public class AdminUsersPresenter
   public void actionPassword()
   {
   }
+
+  @Override
+  public void actionDelete()
+  {
+    if ( null != _currentUser )
+    {
+      _userService.deleteUser( _currentUser.getId(),
+                               new AsyncCallback<Void>()
+                               {
+                                 @Override
+                                 public void onSuccess( final Void ignored )
+                                 {
+                                   _currentUser = null;
+                                   _view.clearCurrentUser();
+                                   refreshUsers();
+                                 }
+                               } );
+    }
+  }
 }

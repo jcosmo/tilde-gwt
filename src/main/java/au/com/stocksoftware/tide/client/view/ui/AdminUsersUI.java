@@ -5,7 +5,6 @@ import au.com.stocksoftware.tide.client.entity.UserVO;
 import au.com.stocksoftware.tide.client.view.AdminUsersView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor.Path;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -13,7 +12,6 @@ import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.core.client.ValueProvider;
@@ -45,6 +43,9 @@ public class AdminUsersUI
 
   @UiField
   TextButton _passwordButton;
+
+  @UiField
+  TextButton _deleteButton;
 
   @UiField
   TextButton _saveButton;
@@ -102,10 +103,11 @@ public class AdminUsersUI
   @Override
   public void showAddUser()
   {
+    _userList.getSelectionModel().deselectAll( );
     updateValues( null );
     enableFields( true );
     _userLogin.focus();
-    configureButtons( false, true, false, true );
+    configureButtons( false, true, false, true, false );
   }
 
   @Override
@@ -113,7 +115,7 @@ public class AdminUsersUI
   {
     updateValues( user );
     enableFields( false );
-    configureButtons( true, false, true, false );
+    configureButtons( true, false, true, false, true );
   }
 
   @Override
@@ -121,7 +123,7 @@ public class AdminUsersUI
   {
     updateValues( user );
     enableFields( true );
-    configureButtons( false, true, true, true );
+    configureButtons( false, true, false, true, false );
   }
 
   @Override
@@ -129,7 +131,8 @@ public class AdminUsersUI
   {
     updateValues( null );
     enableFields( false );
-    configureButtons( false, false, false, false );
+    configureButtons( false, false, false, false, false );
+    _userList.getSelectionModel().deselectAll( );
   }
 
   @Override
@@ -185,6 +188,12 @@ public class AdminUsersUI
     _presenter.actionCancel();
   }
 
+  @UiHandler( { "_deleteButton" } )
+  public void onDeleteClicked( final SelectEvent event )
+  {
+    _presenter.actionDelete();
+  }
+
   @UiHandler( { "_editButton" } )
   public void onEditClicked( final SelectEvent event )
   {
@@ -208,12 +217,17 @@ public class AdminUsersUI
     _presenter.actionUserSelected( event.getSelectedItem() );
   }
 
-  private void configureButtons( final boolean edit, final boolean cancel, final boolean password, final boolean save )
+  private void configureButtons( final boolean edit,
+                                 final boolean cancel,
+                                 final boolean password,
+                                 final boolean save,
+                                 final boolean delete )
   {
     _editButton.setVisible( edit );
     _cancelButton.setVisible( cancel );
     _passwordButton.setVisible( password );
     _saveButton.setVisible( save );
+    _deleteButton.setVisible( delete );
     _userContentPanel.getButtonBar().syncSize();
     _userContentPanel.syncSize();
   }
