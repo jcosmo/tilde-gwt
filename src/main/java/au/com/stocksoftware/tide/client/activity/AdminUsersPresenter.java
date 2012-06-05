@@ -6,6 +6,8 @@ import au.com.stocksoftware.tide.client.service.core.UserService;
 import au.com.stocksoftware.tide.client.service.util.Converter;
 import au.com.stocksoftware.tide.client.view.AdminUsersView;
 import au.com.stocksoftware.tide.client.view.AdminUsersView.Presenter;
+import au.com.stocksoftware.tide.client.view.ui.PasswordDialogUI;
+import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 import java.util.List;
 import org.realityforge.replicant.client.AsyncCallback;
@@ -106,6 +108,11 @@ public class AdminUsersPresenter
   @Override
   public void actionPassword()
   {
+    if ( null != _currentUser )
+    {
+      final PasswordDialogUI passwordDialog = GWT.create( PasswordDialogUI.class );
+      passwordDialog.show( this, _currentUser );
+    }
   }
 
   @Override
@@ -125,5 +132,25 @@ public class AdminUsersPresenter
                                  }
                                } );
     }
+  }
+
+  @Override
+  public void actionPasswordCancel( final PasswordDialogUI dialog )
+  {
+    dialog.hide();
+  }
+
+  @Override
+  public void actionPasswordSave( final PasswordDialogUI dialog, final UserVO user, final String newPassword )
+  {
+    _userService.setPassword( user.getId(), newPassword,
+                             new AsyncCallback<Void>()
+                             {
+                               @Override
+                               public void onSuccess( final Void ignored )
+                               {
+                                 dialog.hide();
+                               }
+                             } );
   }
 }

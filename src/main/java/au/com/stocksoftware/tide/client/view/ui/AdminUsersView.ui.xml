@@ -69,7 +69,7 @@
                 <button:TextButton text="Edit" ui:field="_editButton"/>
               </c:button>
               <c:button>
-                <button:TextButton text="Change Password" ui:field="_passwordButton"/>
+                <button:TextButton text="New Password" ui:field="_passwordButton"/>
               </c:button>
               <c:button>
                 <button:TextButton text="Save" ui:field="_saveButton"/>

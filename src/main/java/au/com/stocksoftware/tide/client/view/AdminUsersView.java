@@ -2,6 +2,7 @@ package au.com.stocksoftware.tide.client.view;
 
 import au.com.stocksoftware.tide.client.activity.AdminUsersPresenter;
 import au.com.stocksoftware.tide.client.entity.UserVO;
+import au.com.stocksoftware.tide.client.view.ui.PasswordDialogUI;
 import java.util.List;
 
 public interface AdminUsersView
@@ -39,5 +40,9 @@ public interface AdminUsersView
     void actionPassword();
 
     void actionDelete();
+
+    void actionPasswordCancel( final PasswordDialogUI dialog );
+
+    void actionPasswordSave( final PasswordDialogUI dialog, UserVO user, String newPassword );
   }
 }
