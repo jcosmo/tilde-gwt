@@ -36,7 +36,7 @@ define('tide', :layout => layout) do
   test.with :mockito, :guiceyloops, :eclipselink, :jtds
   test.using :testng
 
-  tide_module = gwt(["eweb.tide.CalendarDev"],
+  tide_module = gwt(["au.com.stocksoftware.tide.Tide"],
                         :dependencies => [project.compile.dependencies,
                                           project.compile.target,
                                           :gxt,
@@ -58,7 +58,7 @@ define('tide', :layout => layout) do
   clean { rm_rf _(:target, :generated) }
   clean { rm_rf _("services") }
 
-  iml.add_gwt_facet({"eweb.tide.CalendarDev" => true, "eweb.tide.Calendar" => false}, :settings => {:compilerMaxHeapSize => "1024"})
+  iml.add_gwt_facet({"au.com.stocksoftware.tide.TideDev" => true, "au.com.stocksoftware.tide.Tide" => false}, :settings => {:compilerMaxHeapSize => "1024"})
 
   iml.add_jpa_facet(:persistence_xml => _(:generated, "main/jpa/resources/META-INF/persistence.xml"),
                     :provider_enabled => "EclipseLink")
@@ -91,12 +91,12 @@ def define_service_project(classname)
 
     pkg = package(:jar)
     pkg.include(_(:generated, :ws, service_name, "META-INF")).exclude('*.xjb')
-    pkg.include(_(:generated, :ws, service_name, "classes/eweb"))
+    pkg.include(_(:generated, :ws, service_name, "classes/au"))
     pkg.enhance [t.name]
 
     src_pkg = package(:sources)
     src_pkg.include(_(:generated, :ws, service_name, "META-INF")).exclude('*.xjb')
-    src_pkg.include(_(:generated, :ws, service_name, "src/eweb"))
+    src_pkg.include(_(:generated, :ws, service_name, "src/au"))
     src_pkg.enhance [t.name]
 
     wsdl = file("#{_(:generated, :ws, service_name, "META-INF")}/wsdl/#{service_name}.wsdl")
@@ -110,5 +110,6 @@ def define_service_project(classname)
   end
 end
 
-define_service_project("eweb.tide.server.service.tide.TideServiceBoundaryEJB")
+define_service_project("au.com.stocksoftware.tide.server.service.tide.UserServiceEJB")
+define_service_project("au.com.stocksoftware.tide.server.service.tide.ProjectServiceEJB")
 
