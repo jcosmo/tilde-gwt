@@ -19,11 +19,13 @@ public class TideFactory
     return _injector.getInstance( type );
   }
 
-  public User createUser( final String name, final String password )
+  public User createUser( final String login, final String name, final String password, final String email )
   {
     final User user = new User();
+    user.setLogin( login );
     user.setName( name );
     user.setPassword( password );
+    user.setEmail( email );
     s( UserDAO.class ).persist( user );
     return user;
   }

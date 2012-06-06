@@ -12,8 +12,8 @@ public class UserServiceEJBTest
   @Test
   public void testGetUsers()
   {
-    factory().createUser( "foo", "bar" );
-    factory().createUser( "baz", "bob" );
+    factory().createUser( "a", "foo", "bar", "a@a" );
+    factory().createUser( "b", "baz", "bob", "b@b" );
     assertEquals( service().getUsers().size(), 2 );
   }
 
