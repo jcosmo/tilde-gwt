@@ -34,6 +34,17 @@ Domgen.repository(:Tide) do |repository|
       s.text(:Email)
     end
 
+    data_module.entity(:Project) do |t|
+      t.integer(:ID, :primary_key => true)
+      t.string(:Name, 255)
+      t.unique_constraint([:Name])
+    end
+
+    data_module.struct(:ProjectDTO) do |s|
+      s.integer(:ID)
+      s.text(:Name)
+    end
+
     data_module.service(:UserService) do |s|
       s.method(:GetUsers) do |m|
         m.returns(:struct, :referenced_struct => :UserDTO, :collection_type => :sequence)
@@ -62,6 +73,27 @@ Domgen.repository(:Tide) do |repository|
       s.method(:SetPassword) do |m|
         m.reference(:User)
         m.string(:Password, 255)
+      end
+    end
+
+    data_module.service(:ProjectService) do |s|
+      s.method(:GetProjects) do |m|
+        m.returns(:struct, :referenced_struct => :ProjectDTO, :collection_type => :sequence)
+      end
+
+      s.method(:AddProject) do |m|
+        m.string(:Name, 255)
+        m.returns(:struct, :referenced_struct => :ProjectDTO)
+      end
+
+      s.method(:DeleteProject) do |m|
+        m.reference(:Project)
+      end
+
+      s.method(:UpdateProject) do |m|
+        m.reference(:Project)
+        m.string(:Name, 255)
+        m.returns(:struct, :referenced_struct => :ProjectDTO)
       end
     end
   end

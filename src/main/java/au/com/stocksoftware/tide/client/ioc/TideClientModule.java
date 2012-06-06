@@ -1,14 +1,18 @@
 package au.com.stocksoftware.tide.client.ioc;
 
 import au.com.stocksoftware.tide.client.activity.AdminActivity;
+import au.com.stocksoftware.tide.client.activity.AdminProjectsPresenter;
 import au.com.stocksoftware.tide.client.activity.AdminUsersPresenter;
 import au.com.stocksoftware.tide.client.place.AdminPlace;
 import au.com.stocksoftware.tide.client.place.AdminPlace.AdminTask;
 import au.com.stocksoftware.tide.client.presenter.GlobalAsyncCallback;
+import au.com.stocksoftware.tide.client.view.AdminProjectsView;
 import au.com.stocksoftware.tide.client.view.AdminUsersView;
 import au.com.stocksoftware.tide.client.view.AdminView;
 import au.com.stocksoftware.tide.client.view.Presenter;
 import au.com.stocksoftware.tide.client.view.View;
+import au.com.stocksoftware.tide.client.view.ui.AdminProjectsPanel;
+import au.com.stocksoftware.tide.client.view.ui.AdminProjectsUI;
 import au.com.stocksoftware.tide.client.view.ui.AdminUI;
 import au.com.stocksoftware.tide.client.view.ui.AdminUsersPanel;
 import au.com.stocksoftware.tide.client.view.ui.AdminUsersUI;
@@ -36,9 +40,11 @@ public class TideClientModule
 
     bindPresenter( AdminView.Presenter.class, AdminActivity.class, AdminView.class, AdminUI.class );
     bindPresenter( AdminUsersView.Presenter.class, AdminUsersPresenter.class, AdminUsersView.class, AdminUsersUI.class );
+    bindPresenter( AdminProjectsView.Presenter.class, AdminProjectsPresenter.class, AdminProjectsView.class, AdminProjectsUI.class );
     bindNamedService( "GLOBAL", AsyncCallback.class, GlobalAsyncCallback.class );
 
     bind( AdminUsersPanel.class ).asEagerSingleton();
+    bind( AdminProjectsPanel.class ).asEagerSingleton();
     bind( Application.class ).asEagerSingleton();
   }
 

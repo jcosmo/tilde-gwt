@@ -36,6 +36,9 @@ public class AdminUI
   @Inject
   private AdminUsersPanel _usersPanel;
 
+  @Inject
+  private AdminProjectsPanel _projectsPanel;
+
   private AdminTask _currentView;
 
   @Override
@@ -53,8 +56,9 @@ public class AdminUI
     switch ( task )
     {
       case PROJECTS:
-        _contentArea.setWidget( ensureProjectUI() );
+        _contentArea.setWidget( _projectsPanel );
         _currentView = task;
+        _projectsPanel.notifyShown();
         break;
 
       case USERS:
@@ -63,15 +67,6 @@ public class AdminUI
         _usersPanel.notifyShown();
         break;
     }
-  }
-
-  private IsWidget ensureProjectUI()
-  {
-    if ( null == _projectsUI )
-    {
-      _projectsUI = new Label( "This is the Projects UI!" );
-    }
-    return _projectsUI;
   }
 
   @UiTemplate( "AdminView.ui.xml" )

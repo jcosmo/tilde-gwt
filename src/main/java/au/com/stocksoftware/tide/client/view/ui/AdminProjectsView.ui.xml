@@ -1,0 +1,72 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+             xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client"
+             xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form"
+             xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button"
+             xmlns:c="urn:import:com.sencha.gxt.widget.core.client"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+  <ui:style>
+    .pane {
+      background: white;
+    }
+  </ui:style>
+
+  <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData">
+    <ui:attributes width="1" height="-1"/>
+  </ui:with>
+
+  <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="descriptionLayoutData">
+    <ui:attributes width="1" height="130"/>
+  </ui:with>
+
+  <!-- TODO, width is not working -->
+  <ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="listLayoutData">
+    <ui:attributes size="300"/>
+  </ui:with>
+
+  <container:SimpleContainer addStyleNames="{style.pane}">
+    <container:child>
+      <container:BorderLayoutContainer borders="false">
+        <container:west layoutData="{listLayoutData}">
+          <c:ContentPanel width="300" headerVisible="false" borders="false" bodyBorder="false"
+                          bodyStyle="background: none; padding: 5px">
+            <gxt:ListView ui:field="_list" height="150" width="300"/>
+            <c:button>
+              <button:TextButton text="New Project" ui:field="_addButton"/>
+            </c:button>
+          </c:ContentPanel>
+        </container:west>
+        <container:center>
+          <g:VerticalPanel spacing="10">
+            <c:ContentPanel width="280" height="60" headerVisible="false" borders="false" bodyBorder="false"
+                            bodyStyle="background: none; padding: 5px" ui:field="_contentPanel">
+              <container:VerticalLayoutContainer>
+                <container:child layoutData="{verticalLayoutData}">
+                  <form:FieldLabel text="Name">
+                    <form:widget>
+                      <form:TextField ui:field="_nameField"/>
+                    </form:widget>
+                  </form:FieldLabel>
+                </container:child>
+              </container:VerticalLayoutContainer>
+              <c:button>
+                <button:TextButton text="Edit" ui:field="_editButton"/>
+              </c:button>
+              <c:button>
+                <button:TextButton text="Save" ui:field="_saveButton"/>
+              </c:button>
+              <c:button>
+                <button:TextButton text="Delete" ui:field="_deleteButton"/>
+              </c:button>
+              <c:button>
+                <button:TextButton text="Cancel" ui:field="_cancelButton"/>
+              </c:button>
+            </c:ContentPanel>
+          </g:VerticalPanel>
+        </container:center>
+      </container:BorderLayoutContainer>
+    </container:child>
+  </container:SimpleContainer>
+</ui:UiBinder>
