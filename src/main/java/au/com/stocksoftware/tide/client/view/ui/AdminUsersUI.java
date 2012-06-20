@@ -1,6 +1,7 @@
 package au.com.stocksoftware.tide.client.view.ui;
 
 import au.com.stocksoftware.tide.client.activity.AdminUsersPresenter;
+import au.com.stocksoftware.tide.client.data_type.core.UserType;
 import au.com.stocksoftware.tide.client.entity.UserVO;
 import au.com.stocksoftware.tide.client.view.AdminUsersView;
 import com.google.gwt.core.client.GWT;
@@ -15,6 +16,7 @@ import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.core.client.ValueProvider;
+import com.sencha.gxt.data.shared.LabelProvider;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
@@ -23,6 +25,7 @@ import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.ListView;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import java.util.List;
 
@@ -64,6 +67,9 @@ public class AdminUsersUI
 
   @UiField
   ContentPanel _userContentPanel;
+
+  @UiField
+  ComboBox<UserType> _type;
   
   Presenter _presenter;
 
@@ -103,7 +109,7 @@ public class AdminUsersUI
   @Override
   public void showAddUser()
   {
-    _userList.getSelectionModel().deselectAll( );
+    _userList.getSelectionModel().deselectAll();
     updateValues( null );
     enableFields( true );
     _userLogin.focus();
@@ -132,13 +138,14 @@ public class AdminUsersUI
     updateValues( null );
     enableFields( false );
     configureButtons( false, false, false, false, false );
-    _userList.getSelectionModel().deselectAll( );
+    _userList.getSelectionModel().deselectAll();
   }
 
   @Override
   public UserVO getCurrentValues()
   {
-    return new UserVO( -1, _userLogin.getCurrentValue(), _userName.getCurrentValue(), _userEmail.getCurrentValue() );
+    return new UserVO( -1, _userLogin.getCurrentValue(), _userName.getCurrentValue(), _userEmail.getCurrentValue(),
+                       UserType.STAFF );
   }
 
   @Override
@@ -155,7 +162,8 @@ public class AdminUsersUI
     final ListView<UserVO, String> list = new ListView<UserVO, String>(
       new ListStore<UserVO>( userProperties.key() ), userProperties.name() );
 
-    list.getSelectionModel().addSelectionHandler( new SelectionHandler<UserVO>() {
+    list.getSelectionModel().addSelectionHandler( new SelectionHandler<UserVO>()
+    {
       @Override
       public void onSelection( final SelectionEvent<UserVO> userVOSelectionEvent )
       {
@@ -166,6 +174,16 @@ public class AdminUsersUI
     return list;
   }
 
+  @UiFactory
+  ComboBox<UserType> createUserTypeCombo()
+  {
+    final UserTypeProperties props = GWT.create( UserTypeProperties.class );
+
+    final ListStore<UserType> store = new ListStore<UserType>(props.key());
+
+    return new ComboBox<UserType>(store, props.name());
+  }
+
   interface UserProperties
     extends PropertyAccess<UserVO>
   {
@@ -174,6 +192,16 @@ public class AdminUsersUI
 
     @Path( "name" )
     ValueProvider<UserVO, String> name();
+  }
+
+  interface UserTypeProperties
+    extends PropertyAccess<UserType>
+  {
+    @Path( "ordinal" )
+    ModelKeyProvider<UserType> key();
+
+    @Path( "name" )
+    LabelProvider<UserType> name();
   }
 
   @UiHandler( { "_addButton" } )

@@ -28,7 +28,8 @@ public final class Converter
     return new UserVO( dto.getID(),
                        dto.getLogin(),
                        dto.getName(),
-                       dto.getEmail() );
+                       dto.getEmail(),
+                       dto.getUserType());
   }
 
   public static List<ProjectVO> projectDTOsToVOs( final List<ProjectDTO> dtos )

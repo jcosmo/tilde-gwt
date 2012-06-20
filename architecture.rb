@@ -17,12 +17,15 @@ Domgen.repository(:Tide) do |repository|
       t.string(:Name, 255)
     end
 
+    data_module.enumeration(:UserType, :integer, :values => {"STAFF" => 0 ,"ADMIN" => 1})
+
     data_module.entity(:User) do |t|
       t.integer(:ID, :primary_key => true)
       t.string(:Login, 255)
       t.string(:Name, 255)
       t.string(:Email, 255)
       t.string(:Password, 255)
+      t.enumeration(:UserType, :UserType)
       t.unique_constraint([:Login])
       t.unique_constraint([:Name])
     end
@@ -32,6 +35,7 @@ Domgen.repository(:Tide) do |repository|
       s.text(:Login)
       s.text(:Name)
       s.text(:Email)
+      s.enumeration(:UserType, :UserType)
     end
 
     data_module.entity(:Project) do |t|
@@ -55,6 +59,7 @@ Domgen.repository(:Tide) do |repository|
         m.string(:Name, 255)
         m.string(:Password, 255)
         m.string(:Email, 255)
+        m.enumeration(:UserType, :UserType)
         m.returns(:struct, :referenced_struct => :UserDTO)
       end
 
@@ -67,6 +72,7 @@ Domgen.repository(:Tide) do |repository|
         m.string(:Login, 255)
         m.string(:Name, 255)
         m.string(:Email, 255)
+        m.enumeration(:UserType, :UserType)
         m.returns(:struct, :referenced_struct => :UserDTO)
       end
 

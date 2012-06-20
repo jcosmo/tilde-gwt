@@ -40,9 +40,16 @@
         </container:west>
         <container:center>
           <g:VerticalPanel spacing="10">
-            <c:ContentPanel width="280" height="120" headerVisible="false" borders="false" bodyBorder="false"
+            <c:ContentPanel width="280" height="160" headerVisible="false" borders="false" bodyBorder="false"
                             bodyStyle="background: none; padding: 5px" ui:field="_userContentPanel">
               <container:VerticalLayoutContainer>
+                <container:child layoutData="{verticalLayoutData}">
+                  <form:FieldLabel text="User Type">
+                    <form:widget>
+                      <form:ComboBox ui:field="_type" allowBlank="true" forceSelection="true" triggerAction="ALL"/>
+                    </form:widget>
+                  </form:FieldLabel>
+                </container:child>
                 <container:child layoutData="{verticalLayoutData}">
                   <form:FieldLabel text="Login">
                     <form:widget>

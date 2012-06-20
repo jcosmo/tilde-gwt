@@ -20,6 +20,7 @@ public class AdminUsersPresenter
 
   @Inject
   private UserService _userService;
+
   private UserVO _currentUser;
   private boolean _newUser;
 
@@ -78,6 +79,7 @@ public class AdminUsersPresenter
     if ( null != _currentUser )
     {
       _userService.updateUser( _currentUser.getId(), newValues.getLogin(), newValues.getName(), newValues.getEmail(),
+                               newValues.getUserType(),
                                new AsyncCallback<UserDTO>()
                                {
                                  @Override
@@ -92,6 +94,7 @@ public class AdminUsersPresenter
     else if ( _newUser )
     {
       _userService.addUser( newValues.getLogin(), newValues.getName(), "password", newValues.getEmail(),
+                            newValues.getUserType(),
                             new AsyncCallback<UserDTO>()
                             {
                               @Override

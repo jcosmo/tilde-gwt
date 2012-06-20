@@ -17,12 +17,11 @@ define('tide', :layout => layout) do
                :javax_servlet,
                :javax_validation,
                :javax_annotation,
+               :javax_security_annotations,
                :jackson_core,
                :jackson_mapper,
                :gxt,
                :gxt_uibinder,
-               :javax_annotation,
-               :gwt_user,
                :google_guice,
                :aopalliance,
                :google_guice_assistedinject,
@@ -36,7 +35,7 @@ define('tide', :layout => layout) do
   test.with :mockito, :guiceyloops, :eclipselink, :jtds
   test.using :testng
 
-  tide_module = gwt(["au.com.stocksoftware.tide.Tide"],
+  tide_module = gwt(["au.com.stocksoftware.tide.TideDev"],
                         :dependencies => [project.compile.dependencies,
                                           project.compile.target,
                                           :gxt,
@@ -65,12 +64,15 @@ define('tide', :layout => layout) do
   iml.add_ejb_facet
   iml.add_web_facet
 
-  ipr.add_exploded_war_artifact(project,
-                                :dependencies => [project, :gwt_user],
+end
+
+Buildr.project('tide').ipr.add_exploded_war_artifact(project('tide'),
+              :name => 'tide',
+                                :dependencies => [project('tide'), :gwt_user],
                                 :enable_gwt => true,
                                 :enable_ejb => true,
                                 :enable_jpa => true)
-end
+
 
 define_dbt_tasks(Buildr.project('tide'))
 

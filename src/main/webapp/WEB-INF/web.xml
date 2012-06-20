@@ -5,8 +5,29 @@
          xsi:schemaLocation=" http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
   <!-- Default page to serve -->
-    <welcome-file-list>
-      <welcome-file>Tide.html</welcome-file>
-    </welcome-file-list>
+  <welcome-file-list>
+    <welcome-file>Tide.html</welcome-file>
+  </welcome-file-list>
 
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>gwtmodule</web-resource-name>
+      <url-pattern>/Tide.html</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Authenticated</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <login-config>
+    <!--<auth-method>BASIC</auth-method>-->
+    <auth-method>FORM</auth-method>
+    <realm-name>tide</realm-name>
+    <form-login-config>
+      <form-login-page>/Login.html</form-login-page>
+      <form-error-page>/LoginFail.html</form-error-page>
+    </form-login-config>
+  </login-config>
+  <security-role>
+    <role-name>Authenticated</role-name>
+  </security-role>
 </web-app>
