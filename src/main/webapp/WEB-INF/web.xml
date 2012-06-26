@@ -12,7 +12,7 @@
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>gwtmodule</web-resource-name>
-      <url-pattern>/Tide.html</url-pattern>
+      <url-pattern>/</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>Authenticated</role-name>
