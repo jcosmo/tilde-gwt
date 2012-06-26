@@ -79,6 +79,7 @@ public class AdminUsersUI
   {
   }
 
+
   private static AdminUsersViewUiBinder _uiBinder = GWT.create( AdminUsersViewUiBinder.class );
 
   public AdminUsersUI()
@@ -179,7 +180,12 @@ public class AdminUsersUI
   {
     final UserTypeProperties props = GWT.create( UserTypeProperties.class );
 
-    final ListStore<UserType> store = new ListStore<UserType>(props.key());
+    final ListStore<UserType> store = new ListStore<UserType>( props.ordinal());
+
+    for ( UserType userType : UserType.values() )
+    {
+      store.add( userType );
+    }
 
     return new ComboBox<UserType>(store, props.name());
   }
@@ -198,7 +204,7 @@ public class AdminUsersUI
     extends PropertyAccess<UserType>
   {
     @Path( "ordinal" )
-    ModelKeyProvider<UserType> key();
+    ModelKeyProvider<UserType> ordinal();
 
     @Path( "name" )
     LabelProvider<UserType> name();
