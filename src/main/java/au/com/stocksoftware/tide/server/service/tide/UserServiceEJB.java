@@ -18,7 +18,6 @@ import javax.ejb.Stateless;
 import javax.annotation.security.DeclareRoles;
 
 @Stateless( name = UserService.EJB_NAME )
-@DeclareRoles("Authenticated")
 public class UserServiceEJB
   implements UserService
 {
@@ -34,10 +33,6 @@ public class UserServiceEJB
   @Nonnull
   public List<UserDTO> getUsers()
   {
-    LOG.severe(" Principal Name : " + _sessionContext.getCallerPrincipal().getName());
-    LOG.severe(" Principal ToString : " + _sessionContext.getCallerPrincipal().toString());
-    LOG.severe(" Is Authenticated : " + _sessionContext.isCallerInRole("Authenticated"));
-    LOG.severe(" Is FooBar : " + _sessionContext.isCallerInRole("FooBar"));
     final List<User> users = _userDAO.findAll();
     Collections.sort( users, UserComparator.COMPARATOR );
 
