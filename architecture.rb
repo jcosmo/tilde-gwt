@@ -11,6 +11,8 @@ Domgen.repository(:Tide) do |repository|
   repository.jpa.base_package = 'au.com.stocksoftware.tide'
   repository.gwt.package = 'au.com.stocksoftware.tide'
 
+  
+  
   repository.data_module(:Core) do |data_module|
     data_module.entity(:Client) do |t|
       t.integer(:ID, :primary_key => true)

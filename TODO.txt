@@ -10,3 +10,5 @@
   See http://code.google.com/p/google-rfc-2445/wiki/LifeOfARecurrence
 
 * Update setup.bat to ruby script and import configuration from database.yml
+
+* T4wting
